@@ -60,6 +60,19 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
+    public List<Employee> employeeUnderSameManager(long mid) {
+        List<Employee> employeeList = getAllEmployee();
+        List<Employee> sameManager = new ArrayList<>();
+
+        for(int i = 0 ; i < employeeList.size() ;i++){
+            if((long)employeeList.get(i).getManagerId() == mid){
+                sameManager.add(employeeList.get(i));
+            }
+        }
+        return sameManager;
+    }
+
+    @Override
     public Employee changeById(Employee employee, long id) {
         Employee employee1 =  getEmployeeById(id);
         if(employee1 != null && employee1.getEmployeeName() != employee.getEmployeeName()){

@@ -15,4 +15,5 @@ public interface EmployeeService {
     Employee getEmployeeById(long id);
     Project getProject(long eid);
     Manager getManager(long eid);
+    List<Employee> employeeUnderSameManager(long mid);
 }

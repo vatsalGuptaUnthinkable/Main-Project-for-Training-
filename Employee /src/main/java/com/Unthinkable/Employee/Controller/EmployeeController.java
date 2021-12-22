@@ -1,6 +1,7 @@
 package com.Unthinkable.Employee.Controller;
 
 import com.Unthinkable.Employee.Entity.Employee;
+import com.Unthinkable.Employee.Entity.EmployeeList;
 import com.Unthinkable.Employee.Entity.Manager;
 import com.Unthinkable.Employee.Entity.Project;
 import com.Unthinkable.Employee.Service.EmployeeService;
@@ -14,9 +15,15 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private EmployeeList employeeList;
+
+
     @GetMapping("/employee")
-    public List<Employee> getAllEmployee(){
-        return employeeService.getAllEmployee();
+    public EmployeeList getAllEmployee(){
+        List<Employee> emp =  employeeService.getAllEmployee();
+        employeeList.setEmployeeList(emp);
+        return employeeList;
     }
 
     @GetMapping("/employee/{id}")
@@ -50,4 +57,10 @@ public class EmployeeController {
     public Manager getManager(@PathVariable("id") long eid){
         return employeeService.getManager(eid);
     }
+
+    @GetMapping("/employeeUnderSameManager/{mid}")
+    public List<Employee> employeeUnderSameManager(@PathVariable("mid") long mid){
+        return  employeeService.employeeUnderSameManager(mid);
+    }
+
 }
